@@ -2,6 +2,8 @@ package com.file.demo.controller;
 
 
 
+import java.util.logging.Logger;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +17,8 @@ import com.file.demo.service.S3Service;
 
 public class UploadController {
 
+	private static final Logger logger = Logger.getLogger(UploadController.class.getName());
+	
     private final S3Service s3Service;
     
 
@@ -26,9 +30,9 @@ public class UploadController {
 	@PostMapping("/files/upload")
     public String uploadFile(
             @RequestParam("file") MultipartFile file) {
-		System.out.println("File Name: " + file.getOriginalFilename());
-	    System.out.println("File Size: " + file.getSize());
-
+		
+		logger.info("File Name: " + file.getOriginalFilename()+ " "+"File Size: " + file.getSize());
+		
         return s3Service.uploadFile(file, "files");
     }
 
@@ -36,6 +40,7 @@ public class UploadController {
     public String uploadImage(
             @RequestParam("image") MultipartFile image) {
 
+    	logger.info("image Name: " + image.getOriginalFilename()+ " "+"image Size: " + image.getSize());
         return s3Service.uploadFile(image, "images");
     }
 }

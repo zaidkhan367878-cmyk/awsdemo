@@ -8,6 +8,21 @@ spring:
       max-file-size: 20MB
       max-request-size: 20MB
 
+  datasource:
+    url: jdbc:postgresql://database-1.c7w2oy4o0b3j.ap-south-1.rds.amazonaws.com/employeedb
+    username: postgres
+    password: admin123
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
 aws:
   region: ap-south-1
   bucket-name: microservice-demo-951532862784-ap-south-1-an
